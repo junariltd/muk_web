@@ -33,6 +33,7 @@
         "Mathias Markl <mathias.markl@mukit.at>",
     ],
     "depends": [
+        "jcrm_base",
         "base_setup",
         "web_editor",
     ],

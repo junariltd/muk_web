@@ -24,6 +24,7 @@
 
 <odoo>
 	
+    <!-- JUNARI MOD: Don't allow users to change sidebar type
     <record id="res_users_preferences" model="ir.ui.view">
         <field name="name">res.users.preferences</field>
         <field name="model">res.users</field>
@@ -41,5 +42,6 @@
             </xpath>
         </field>
     </record>
+    -->
 
 </odoo>
