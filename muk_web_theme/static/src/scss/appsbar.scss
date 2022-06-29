@@ -85,15 +85,14 @@
 		/* JUNARI MOD: Allow sidebar to expand / contract on hover */
 		.mk_apps_sidebar_panel {
 			width: $mk-sidebar-small-width;
-			transition: width 0.15s ease-in-out;
-			transition-delay: 200ms;
 			box-shadow: 0px 0 5px 0px #555;
-			&:hover {
-				width: 200px;
-			}
 			/*.mk_apps_sidebar_icon {
 				margin-right: 0 !important;
 			}*/
+			&.sidebar_panel_expanded {
+				width: 200px;
+				transition: width 0.15s ease-in-out;
+			}
 		}
 		.o_action_manager {
 			padding-left: $mk-sidebar-small-width;
@@ -125,14 +124,14 @@
 		/* JUNARI MOD: Allow sidebar to expand / contract on hover */
 		.mk_apps_sidebar_panel {
 			width: $mk-sidebar-small-width;
-			transition: width 0.15s ease-in-out;
 			box-shadow: 0px 0 5px 0px #555;
-			&:hover {
-				width: 200px;
-			}
 			/*.mk_apps_sidebar_icon {
 				margin-right: 0 !important;
 			}*/
+			&.sidebar_panel_expanded {
+				width: 200px;
+				transition: width 0.15s ease-in-out;
+			}
 		}
 		.o_action_manager {
 			padding-left: $mk-sidebar-small-width;

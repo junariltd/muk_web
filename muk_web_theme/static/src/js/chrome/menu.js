@@ -34,12 +34,15 @@ Menu.include({
     	"click .mk_menu_mobile_section": "_onMobileSectionClick",
         "click .o_menu_sections [role=menuitem]": "_hideMobileSubmenus",
         "show.bs.dropdown .o_menu_systray, .o_menu_apps": "_hideMobileSubmenus",
+        "mousemove .mk_apps_sidebar_panel": "_sidebarMouseMove",
+        "mouseout .mk_apps_sidebar_panel": "_sidebarMouseOut",
     }),
     menusTemplate: config.device.isMobile ? 
     		'muk_web_theme.MobileMenu.sections' : Menu.prototype.menusTemplate,
     start() {
     	const res = this._super(...arguments);
         this.$menu_toggle = this.$(".mk_menu_sections_toggle");
+        this.$sidebar_is_expanded = false;
         this.$menu_apps_sidebar = this.$('.mk_apps_sidebar_panel');
         this._appsBar = new AppsBar(this, this.menu_data);
         const appsBarProm = this._appsBar.appendTo(this.$menu_apps_sidebar);
@@ -63,6 +66,26 @@ Menu.include({
         if (this.$menu_toggle.is(":visible") && $('.oe_wait').length === 0 && 
         		this.$section_placeholder.is(":visible")) {
             this.$section_placeholder.collapse("hide");
+        }
+    },
+    _sidebarMouseMove(ev){
+        /**
+         * Junari mod to expand the sidebar
+         */
+        let current_position = ev.clientX
+        if(current_position > 0 && current_position <= 25 && this.$sidebar_is_expanded == false){
+            ev.currentTarget.classList.add("sidebar_panel_expanded")
+            this.$sidebar_is_expanded = true;
+        }
+        
+    },
+    _sidebarMouseOut(ev){
+        /**
+         * Junari mod to collapse the sidebar
+         */
+        if(this.$sidebar_is_expanded == true){
+            ev.currentTarget.classList.remove("sidebar_panel_expanded")
+            this.$sidebar_is_expanded = false;
         }
     },
     _updateMenuBrand() {
