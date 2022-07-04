@@ -35,7 +35,6 @@ Menu.include({
         "click .o_menu_sections [role=menuitem]": "_hideMobileSubmenus",
         "show.bs.dropdown .o_menu_systray, .o_menu_apps": "_hideMobileSubmenus",
         "mousemove .mk_apps_sidebar_panel": "_sidebarMouseMove",
-        "mouseout .mk_apps_sidebar_panel": "_sidebarMouseOut",
     }),
     menusTemplate: config.device.isMobile ? 
     		'muk_web_theme.MobileMenu.sections' : Menu.prototype.menusTemplate,
@@ -49,6 +48,9 @@ Menu.include({
         appsBarProm.then(() => {
             this.$menu_apps_sidebar.renderScrollBar();
         });
+
+        $('.o_action_manager').mousemove(this._sidebarMouseOut.bind(this));
+
         if (config.device.isMobile) {
             const menu_ids = _.keys(this.$menu_sections);
             for (let i = 0; i < menu_ids.length; i++) {
@@ -83,9 +85,8 @@ Menu.include({
         /**
          * Junari mod to collapse the sidebar
          */
-        let current_position = ev.clientX
-        if(this.$sidebar_is_expanded == true && current_position > 190){
-            ev.currentTarget.classList.remove("sidebar_panel_expanded")
+        if(this.$sidebar_is_expanded == true){
+            this.$('.mk_apps_sidebar_panel').removeClass("sidebar_panel_expanded")
             this.$sidebar_is_expanded = false;
         }
     },
