@@ -86,12 +86,13 @@
 		.mk_apps_sidebar_panel {
 			width: $mk-sidebar-small-width;
 			box-shadow: 0px 0 5px 0px #555;
+			transition: width 0.15s ease-in-out;
+			transition-delay: 200ms;
 			/*.mk_apps_sidebar_icon {
 				margin-right: 0 !important;
 			}*/
 			&.sidebar_panel_expanded {
 				width: 200px;
-				transition: width 0.15s ease-in-out;
 			}
 		}
 		.o_action_manager {
@@ -125,12 +126,13 @@
 		.mk_apps_sidebar_panel {
 			width: $mk-sidebar-small-width;
 			box-shadow: 0px 0 5px 0px #555;
-			/*.mk_apps_sidebar_icon {
+			transition: width 0.15s ease-in-out;
+			transition-delay: 200ms;
+		    /*.mk_apps_sidebar_icon {
 				margin-right: 0 !important;
 			}*/
 			&.sidebar_panel_expanded {
 				width: 200px;
-				transition: width 0.15s ease-in-out;
 			}
 		}
 		.o_action_manager {

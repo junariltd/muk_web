@@ -73,7 +73,7 @@ Menu.include({
          * Junari mod to expand the sidebar
          */
         let current_position = ev.clientX
-        if(current_position > 0 && current_position <= 25 && this.$sidebar_is_expanded == false){
+        if(current_position > 0 && current_position <= 20 && this.$sidebar_is_expanded == false){
             ev.currentTarget.classList.add("sidebar_panel_expanded")
             this.$sidebar_is_expanded = true;
         }
@@ -83,7 +83,8 @@ Menu.include({
         /**
          * Junari mod to collapse the sidebar
          */
-        if(this.$sidebar_is_expanded == true){
+        let current_position = ev.clientX
+        if(this.$sidebar_is_expanded == true && current_position > 190){
             ev.currentTarget.classList.remove("sidebar_panel_expanded")
             this.$sidebar_is_expanded = false;
         }
