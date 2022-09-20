@@ -26,7 +26,7 @@
     overflow-y: auto;	
     top: $o-navbar-height;
     background-color: $mk-appbar-background;
-	z-index: 10000;
+	z-index: 1050;
     &::-webkit-scrollbar {
 	  display: none;
 	}
