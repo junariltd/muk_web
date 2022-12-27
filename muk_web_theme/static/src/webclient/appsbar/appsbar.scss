@@ -47,6 +47,9 @@
     top: $o-navbar-height;
     height: calc(100% - #{$o-navbar-height}); 
     background-color: $mk-appbar-background;
+	// JUNARI MOD
+	box-shadow: 0px 2px 5px 0px #555;
+	z-index: 1002;
     .mk_apps_sidebar {
 	    padding: 0;
 	    white-space: nowrap;
@@ -71,7 +74,8 @@
 		            position: relative;
 		            text-decoration: none;
 		            color: $mk-appbar-color;
-		            text-overflow: ellipsis;
+					// JUNARI MOD
+		            // text-overflow: ellipsis;
 		            .mk_apps_sidebar_icon {
 					    width: 22px;
 					    height: 22px;
@@ -97,11 +101,15 @@
 
 @include media-breakpoint-up(lg) {
 	.mk_sidebar_type_large {
+		// JUNARI MOD: Hide sidebar text
 		.mk_apps_sidebar_panel {
-			width: $mk-sidebar-large-width;
+			width: 46px; // $mk-sidebar-large-width;
+		}
+		.mk_apps_sidebar_name {
+			display: none;
 		}
 		.o_action_manager {
-			padding-left: $mk-sidebar-large-width;
+			padding-left: 46px; // $mk-sidebar-large-width;
 		}
 	}
 	.mk_sidebar_type_small {

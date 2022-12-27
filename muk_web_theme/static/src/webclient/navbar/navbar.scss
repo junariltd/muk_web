@@ -43,3 +43,20 @@
 .o_menu_systray .badge {
     --o-navbar-badge-bg: #{$o-brand-primary};
 }
+
+// JUNARI MODS
+.o_main_navbar .o_nav_entry,
+.o_main_navbar .dropdown-toggle,
+.o_main_navbar .o_menu_brand
+{
+    color: rgba(255, 255, 255, 1) !important;
+    font-weight: 500;
+}
+.o_main_navbar .o_menu_brand {
+    font-size: 22px;
+    padding: 0 14px 0 16px;
+    margin-top: -2px;
+}
+.btn-primary {
+    color: #FFF;
+}
