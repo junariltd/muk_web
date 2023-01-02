@@ -44,7 +44,7 @@
     --o-navbar-badge-bg: #{$o-brand-primary};
 }
 
-// JUNARI MODS
+// BEGIN JUNARI MODS
 .o_main_navbar .o_nav_entry,
 .o_main_navbar .dropdown-toggle,
 .o_main_navbar .o_menu_brand
@@ -60,3 +60,7 @@
 .btn-primary {
     color: #FFF;
 }
+input::placeholder {
+    color: #888;
+}
+// END JUNARI MODS
