@@ -60,7 +60,16 @@
 .btn-primary {
     color: #FFF;
 }
+.btn-primary:hover {
+    color: #FFF;
+}
 input::placeholder {
     color: #888;
+}
+.btn-secondary{
+    border-color: #EEE;
+}
+.o_control_panel .btn-secondary {
+    margin-left: 8px;
 }
 // END JUNARI MODS
