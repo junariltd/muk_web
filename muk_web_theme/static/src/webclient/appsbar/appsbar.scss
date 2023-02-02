@@ -49,7 +49,10 @@
     background-color: $mk-appbar-background;
 	// JUNARI MOD
 	box-shadow: 0px 2px 5px 0px #555;
+	transition: width 0.15s ease-in-out;
+	transition-delay: 200ms;
 	z-index: 1002;
+	// END JUNARI MOD
     .mk_apps_sidebar {
 	    padding: 0;
 	    white-space: nowrap;
@@ -99,49 +102,16 @@
 	}
 }
 
-@include media-breakpoint-up(lg) {
-	.mk_sidebar_type_large {
-		// JUNARI MOD: Hide sidebar text
-		.mk_apps_sidebar_panel {
-			width: 46px; // $mk-sidebar-large-width;
-		}
-		.mk_apps_sidebar_name {
-			display: none;
-		}
-		.o_action_manager {
-			padding-left: 46px; // $mk-sidebar-large-width;
-		}
-	}
-	.mk_sidebar_type_small {
-		.mk_apps_sidebar_panel {
-			width: $mk-sidebar-small-width;
-			.mk_apps_sidebar_name {
-				display: none;
-			}
-			.mk_apps_sidebar_icon {
-				margin-right: 0 !important;
-			}
-		}
-		.o_action_manager {
-			padding-left: $mk-sidebar-small-width;
-		}
-	}
-	.mk_sidebar_type_invisible {
-		.mk_apps_sidebar_panel {
-			display: none;
-		}
-	}
-}
-
-@include media-breakpoint-only(md) {
+@include media-breakpoint-up(sm) {
 	.mk_sidebar_type_large, .mk_sidebar_type_small {
 		.mk_apps_sidebar_panel {
-			width: $mk-sidebar-small-width;
-			.mk_apps_sidebar_name {
-				display: none;
+			// JUNARI MOD: Fix sidepanel size and make it expandable
+			width: 45px;
+			&.sidebar_panel_expanded {
+				width: 200px;
 			}
 			.mk_apps_sidebar_icon {
-				margin-right: 0 !important;
+				margin-right: 12px !important;
 			}
 		}
 		.o_action_manager {

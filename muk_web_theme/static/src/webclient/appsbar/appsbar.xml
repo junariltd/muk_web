@@ -45,7 +45,8 @@
 <templates xml:space="preserve">
 
 	<t t-name="muk_web_theme.AppsBar" owl="1">
-		<div class="mk_apps_sidebar_panel">
+		<div t-att-class="'mk_apps_sidebar_panel' + (state.expanded ? ' sidebar_panel_expanded' : '')"
+				t-on-mousemove="onMouseMove">
 			<div class="mk_apps_sidebar">
 				<ul class="mk_apps_sidebar_menu">
 				    <t t-foreach="props.apps" t-as="app" t-key="app.id">
@@ -69,7 +70,7 @@
 			                		class="mk_apps_sidebar_icon" 
 			                		src="/muk_web_theme/static/img/default_icon.png"
 			                	/>
-						        <span class="mk_apps_sidebar_name">
+						        <span class="mk_apps_sidebar_name fw-bold">
 						            <t t-out="app.name"/>
 						        </span>
 			            	 </a>
