@@ -45,7 +45,9 @@
 <templates xml:space="preserve">
 
 	<t t-name="muk_web_theme.AppsBar" owl="1">
-		<div t-att-class="'mk_apps_sidebar_panel' + (state.expanded ? ' sidebar_panel_expanded' : '')"
+		<div t-att-class="'mk_apps_sidebar_panel'
+			+ (state.expanded ? ' sidebar_panel_expanded' : '')
+			+ (state.is_hidden ? ' d-none' : '')"
 				t-on-mousemove="onMouseMove">
 			<div class="mk_apps_sidebar">
 				<ul class="mk_apps_sidebar_menu">

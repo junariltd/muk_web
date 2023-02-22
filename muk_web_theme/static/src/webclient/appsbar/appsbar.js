@@ -47,8 +47,9 @@ import { useService } from "@web/core/utils/hooks";
 
 import { Component } from "@odoo/owl";
 import { ActionContainer } from '@web/webclient/actions/action_container'
+import { WebsitePreview } from '@website/client_actions/website_preview/website_preview'
 import { patch } from "@web/core/utils/patch";
-import { xml, EventBus, useState } from "@odoo/owl";
+import { xml, EventBus, useState, onWillUnmount } from "@odoo/owl";
 
 
 // Create an Odoo service for communication between components
@@ -81,11 +82,16 @@ registry.category('services').add('muk_appbar', AppBarService);
 
 export class AppsBar extends Component {
     setup() {
-        this.state = useState({ expanded: false })
+        this.state = useState({
+            expanded: false,
+            is_hidden: false
+        })
 
         this.appbar_svc = useService("muk_appbar");
         this.appbar_svc.registerEventHandler('expand_bar', () => this._expandMenu());
         this.appbar_svc.registerEventHandler('collapse_bar', () => this._collapseMenu());
+        this.appbar_svc.registerEventHandler('hide_bar', () => this._hideMenu());
+        this.appbar_svc.registerEventHandler('show_bar', () => this._showMenu());
     }
     onMouseMove(ev) {
         let current_position = ev.clientX
@@ -103,6 +109,12 @@ export class AppsBar extends Component {
             this.state.expanded = true;
         }
     }
+    _hideMenu() {
+        this.state.is_hidden = true;
+    }
+    _showMenu() {
+        this.state.is_hidden = false;
+    }
 }
 Object.assign(AppsBar, {
     template: 'muk_web_theme.AppsBar',
@@ -118,7 +130,18 @@ Object.assign(AppsBar, {
 patch(ActionContainer.prototype, 'muk_web_theme.ActionContainer', {
     setup() {
         this._super(...arguments);
+        this.state = useState({
+            appbar_is_hidden: false
+        })
         this.appbar_svc = useService("muk_appbar");
+        this.appbar_svc.registerEventHandler('hide_bar', () => this._hideMenu());
+        this.appbar_svc.registerEventHandler('show_bar', () => this._showMenu());
+    },
+    _hideMenu() {
+        this.state.appbar_is_hidden = true;
+    },
+    _showMenu() {
+        this.state.appbar_is_hidden = false;
     },
     onMainWindowMouseMove() {
         this.appbar_svc.triggerEvent('collapse_bar');
@@ -126,7 +149,24 @@ patch(ActionContainer.prototype, 'muk_web_theme.ActionContainer', {
 });
 ActionContainer.template = xml`
     <t t-name="web.ActionContainer">
-      <div class="o_action_manager" t-on-mousemove="onMainWindowMouseMove">
+      <div class="o_action_manager" t-on-mousemove="onMainWindowMouseMove"
+        t-att-style="state.appbar_is_hidden ? 'padding-left: 0px;' : ''">
         <t t-if="info.Component" t-component="info.Component" className="'o_action'" t-props="info.componentProps" t-key="info.id"/>
       </div>
     </t>`;
+
+// Override Odoo's "ActionContainer" component, so when a user moves the mouse outside of the navbar
+// over the main Odoo window, it triggers the 'collapse_bar' event on the AppBarService
+
+patch(WebsitePreview.prototype, 'muk_web_theme.ActionContainer', {
+    setup() {
+        const res = this._super(...arguments);
+        this.appbar_svc = useService("muk_appbar");
+        this.appbar_svc.triggerEvent('hide_bar');
+        onWillUnmount(this.onWillUnmount);
+        return res;
+    },
+    onWillUnmount() {
+        this.appbar_svc.triggerEvent('show_bar');
+    }
+});

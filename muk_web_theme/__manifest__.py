@@ -56,6 +56,7 @@
         'base_setup',
         'web_editor',
         'mail',
+        'website',
     ],
     'excludes': [
         'web_enterprise',
