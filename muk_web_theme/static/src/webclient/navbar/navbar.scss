@@ -44,7 +44,7 @@
     --o-navbar-badge-bg: #{$o-brand-primary};
 }
 
-// BEGIN JUNARI MODS
+/* BEGIN JUNARI MODS */
 .o_main_navbar .o_nav_entry,
 .o_main_navbar .dropdown-toggle,
 .o_main_navbar .o_menu_brand
@@ -72,4 +72,7 @@ input::placeholder {
 .o_control_panel .btn-secondary {
     margin-left: 8px;
 }
-// END JUNARI MODS
+.o_edit_website_container:not(.o_translatable) {
+    background-color: #7cc8eb;
+}
+/* END JUNARI MODS */
